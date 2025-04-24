@@ -7,14 +7,21 @@
  * @param {string} textToSearch Texto a buscar
  * @param {string} textToReplace Texto a reemplazar     
  */
-
+const fs = require('fs');
 function replaceTextInFile(htmlFilePath, textToSearch, textToReplace) {
+try { const content = fs.readFileSync(htmlFilePath, 'utf-8');
+    const modifiedContent = content.split(textToSearch).join(textToReplace);
+    fs.writeFileSync('result.html', modifiedContent);
 
-}
+    console.log('Archivo result.html creado con los cambios.');
+  } catch (err) {
+    console.error('Error al procesar el archivo:', err);
+  }}
+
 
 replaceTextInFile("./index.html", "FFC371", "ADD8E6");
-//replaceTextInFile("./index.html", "Aaron", "Caballero Oscuro");
-//replaceTextInFile("./index.html", "El Horno de Leña", "La Pizzería Feliz");
+replaceTextInFile("./index.html", "Aaron", "Caballero Oscuro");
+replaceTextInFile("./index.html", "El Horno de Leña", "La Pizzería Feliz");
 
 /**
 * BONUS: Crea un script que permita parametrizar los 3 argumentos de la función.
